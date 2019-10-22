@@ -6,6 +6,7 @@ import cv2
 import numpy as np
 import os
 import util.io as io
+from root_dir import ROOT_DIR
 from util import flow_util
 
 class PoseTransferDataset(BaseDataset):
@@ -19,11 +20,11 @@ class PoseTransferDataset(BaseDataset):
         #############################
         # set path / load label
         #############################
-        data_split = io.load_json(os.path.join(opt.data_root, opt.fn_split))
-        self.img_dir = os.path.join(opt.data_root, opt.img_dir)
-        self.seg_dir = os.path.join(opt.data_root, opt.seg_dir)
-        self.corr_dir = os.path.join(opt.data_root, opt.corr_dir)
-        self.pose_label = io.load_data(os.path.join(opt.data_root, opt.fn_pose))
+        data_split = io.load_json(os.path.join(ROOT_DIR, opt.data_root, opt.fn_split))
+        self.img_dir = os.path.join(ROOT_DIR, opt.data_root, opt.img_dir)
+        self.seg_dir = os.path.join(ROOT_DIR, opt.data_root, opt.seg_dir)
+        self.corr_dir = os.path.join(ROOT_DIR, opt.data_root, opt.corr_dir)
+        self.pose_label = io.load_data(os.path.join(ROOT_DIR, opt.data_root, opt.fn_pose))
         #############################
         # create index list
         #############################

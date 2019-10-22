@@ -109,3 +109,7 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+.idea/
+
+checkpoints/

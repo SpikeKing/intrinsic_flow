@@ -1,13 +1,6 @@
 from __future__ import division, print_function
 
 import torch
-from data.data_loader import CreateDataLoader
-from models.pose_transfer_model import PoseTransferModel
-from options.pose_transfer_options import TestPoseTransferOptions
-from util.visualizer import Visualizer
-from util.loss_buffer import LossBuffer
-
-import util.io as io
 import os
 import sys
 import numpy as np
@@ -16,11 +9,30 @@ import cv2
 import time
 from collections import OrderedDict
 
+
+sys.path.append(os.path.abspath("."))
+
+import util.io as io
+from data.data_loader import CreateDataLoader
+from models.pose_transfer_model import PoseTransferModel
+from options.pose_transfer_options import TestPoseTransferOptions
+from util.visualizer import Visualizer
+from util.loss_buffer import LossBuffer
+
+from root_dir import ROOT_DIR
+
 parser = TestPoseTransferOptions()
 opt = parser.parse(display=False)
+
+opt.id = "PoseTransfer_0.5"
+opt.which_epoch = "best"
+opt.save_output = True
+opt.n_vis = 1
+opt.batch_size = 1
+
 parser.save()
 print('load training options.')
-train_opt = io.load_json(os.path.join('checkpoints', opt.id, 'train_opt.json'))
+train_opt = io.load_json(os.path.join(ROOT_DIR, 'checkpoints', opt.id, 'train_opt.json'))
 preserved_opt = {'gpu_ids', 'is_train', 'batch_size', 'which_epoch', 'n_vis', 'debug'}
 for k, v in train_opt.iteritems():
     if k in opt and (k not in preserved_opt):

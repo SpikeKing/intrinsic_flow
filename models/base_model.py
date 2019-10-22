@@ -3,6 +3,9 @@ from __future__ import division, print_function
 import torch
 import os
 
+from root_dir import ROOT_DIR
+
+
 class BaseModel(object):
     def name(self):
         return 'BaseModel'
@@ -12,7 +15,7 @@ class BaseModel(object):
         self.gpu_ids = opt.gpu_ids
         self.is_train = opt.is_train
         self.Tensor = torch.cuda.FloatTensor if self.gpu_ids else torch.Tensor
-        self.save_dir = os.path.join('checkpoints', opt.id)
+        self.save_dir = os.path.join(ROOT_DIR, 'checkpoints', opt.id)
 
         self.input = {}
         self.output = {}
