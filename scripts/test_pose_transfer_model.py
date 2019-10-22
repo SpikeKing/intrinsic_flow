@@ -28,8 +28,7 @@ opt.id = "PoseTransfer_0.5"
 opt.which_epoch = "best"
 opt.save_output = True
 opt.n_vis = 1
-opt.batch_size = 1
-opt.gpu_ids = "0"
+opt.batch_size = 4
 
 parser.save()
 print('load training options.')
